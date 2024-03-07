@@ -28,7 +28,12 @@ export default class WidgetsModel {
   static deleteWidget = (id) => {
     console.log('\t\t Model : deleteWidget()');
 
+    const widgetCountBeforeDelete = widgets.length;
     widgets = widgets.filter((w) => (w.id !== id));
+
+    if (widgetCountBeforeDelete === widgets.length) {
+      return false;
+    }
 
     return true;
   };
