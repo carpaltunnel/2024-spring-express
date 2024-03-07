@@ -36,4 +36,9 @@ export default class WidgetsCoordinator {
     };
     return WidgetsModel.replaceWidget(id, replaceWidget);
   };
+
+  static updateWidget = (id, widget) => {
+    console.log('\t Coordinator : replaceWidget()');
+    return WidgetsModel.updateWidget(id, widget);
+  };
 }

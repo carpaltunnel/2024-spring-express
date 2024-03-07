@@ -48,4 +48,22 @@ export default class WidgetsModel {
 
     return false;
   };
+
+  static updateWidget = (id, widget) => {
+    const widgetIndex = widgets.findIndex((w) => (w.id === id));
+
+    if (widgetIndex > -1) {
+      Object.keys(widget).forEach((key) => {
+        if (key === 'id') {
+          return;
+        }
+
+        widgets[widgetIndex][key] = widget[key];
+      });
+
+      return widgets[widgetIndex];
+    }
+
+    return false;
+  };
 }

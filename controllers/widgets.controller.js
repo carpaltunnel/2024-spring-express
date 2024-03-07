@@ -54,5 +54,12 @@ export const replaceWidget = async (req, res, next) => {
 
 export const updateWidget = async (req, res, next) => {
   console.log(`Controller : updateWidget(${req.params.id})`);
-  res.status(200).json({});
+
+  const result = WidgetsCoordinator.updateWidget(req.params.id, req.body);
+
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
