@@ -1,11 +1,19 @@
+import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
+
 export const getWidgets = async (req, res, next) => {
     console.log('Controller : getWidgets()');
-    res.status(200).json([]);
+
+    const result = WidgetsCoordinator.getWidgets();
+
+    res.status(200).json(result);
 };
 
 export const createWidget = async (req, res, next) => {
     console.log('Controller : createWidget()');
-    res.status(200).json({});
+
+    const result = WidgetsCoordinator.createWidget();
+
+    res.status(200).json(result);
 };
 
 export const getWidget = async (req, res, next) => {
