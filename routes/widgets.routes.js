@@ -1,5 +1,12 @@
 import express from 'express';
-import { getWidgets, createWidget, getWidget, replaceWidget, deleteWidget, updateWidget } from '../controllers/widgets.controller.js';
+import {
+  getWidgets,
+  createWidget,
+  getWidget,
+  replaceWidget,
+  deleteWidget,
+  updateWidget,
+} from '../controllers/widgets.controller.js';
 
 const widgetsRouter = express.Router();
 
