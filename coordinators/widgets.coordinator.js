@@ -26,5 +26,14 @@ export default class WidgetsCoordinator {
   static deleteWidget = (id) => {
     console.log('\t Coordinator : deleteWidget()');
     return WidgetsModel.deleteWidget(id);
-  }
+  };
+
+  static replaceWidget = (id, widget) => {
+    console.log('\t Coordinator : replaceWidget()');
+    const replaceWidget = {
+      ...widget,
+      id,
+    };
+    return WidgetsModel.replaceWidget(id, replaceWidget);
+  };
 }

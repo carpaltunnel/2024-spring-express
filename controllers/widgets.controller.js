@@ -42,7 +42,14 @@ export const deleteWidget = async (req, res, next) => {
 
 export const replaceWidget = async (req, res, next) => {
   console.log(`Controller : replaceWidget(${req.params.id})`);
-  res.status(200).json({});
+
+  const result = WidgetsCoordinator.replaceWidget(req.params.id, req.body);
+
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const updateWidget = async (req, res, next) => {
