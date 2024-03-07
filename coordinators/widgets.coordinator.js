@@ -17,4 +17,14 @@ export default class WidgetsCoordinator {
 
     return WidgetsModel.createWidget(widget);
   };
+
+  static getWidget = (id) => {
+    console.log('\t Coordinator : getWidget()');
+    return WidgetsModel.getWidget(id);
+  };
+
+  static deleteWidget = (id) => {
+    console.log('\t Coordinator : deleteWidget()');
+    return WidgetsModel.deleteWidget(id);
+  }
 }

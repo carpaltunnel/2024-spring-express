@@ -1,6 +1,6 @@
-const widgets = [
+let widgets = [
   {
-    id: 1,
+    id: '1',
     name: 'Widget #1',
     color: 'blue',
   },
@@ -16,5 +16,20 @@ export default class WidgetsModel {
     console.log('\t\t Model : getWidgets()');
     widgets.push(newWidget);
     return newWidget;
+  };
+
+  static getWidget = (id) => {
+    console.log('\t\t Model : getWidget()');
+
+    const widget = widgets.find((w) => (w.id === id));
+    return widget;
+  };
+
+  static deleteWidget = (id) => {
+    console.log('\t\t Model : deleteWidget()');
+
+    widgets = widgets.filter((w) => (w.id !== id));
+
+    return true;
   };
 }

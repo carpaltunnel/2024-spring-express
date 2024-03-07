@@ -18,16 +18,25 @@ export const createWidget = async (req, res, next) => {
 
 export const getWidget = async (req, res, next) => {
   console.log(`Controller : getWidget(${req.params.id})`);
-  res.status(200).json({});
-};
-
-export const replaceWidget = async (req, res, next) => {
-  console.log(`Controller : replaceWidget(${req.params.id})`);
-  res.status(200).json({});
+  
+  const result = WidgetsCoordinator.getWidget(req.params.id);
+  if (result) {
+    res.status(200).json(result);
+  } else {
+    res.status(404).json();
+  }
 };
 
 export const deleteWidget = async (req, res, next) => {
   console.log(`Controller : deleteWidget(${req.params.id})`);
+
+  const result = WidgetsCoordinator.deleteWidget(req.params.id);
+
+  res.status(200).json(result);
+};
+
+export const replaceWidget = async (req, res, next) => {
+  console.log(`Controller : replaceWidget(${req.params.id})`);
   res.status(200).json({});
 };
 
