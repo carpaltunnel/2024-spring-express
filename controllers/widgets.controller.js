@@ -11,14 +11,17 @@ export const getWidgets = async (req, res, next) => {
 export const createWidget = async (req, res, next) => {
   console.log('Controller : createWidget()');
 
-  const result = WidgetsCoordinator.createWidget(req.body);
-
-  res.status(201).json(result);
+  try {
+    const result = WidgetsCoordinator.createWidget(req.body);
+    res.status(201).json(result);
+  } catch (ex) {
+    next(ex);
+  }
 };
 
 export const getWidget = async (req, res, next) => {
   console.log(`Controller : getWidget(${req.params.id})`);
-  
+
   const result = WidgetsCoordinator.getWidget(req.params.id);
   if (result) {
     res.status(200).json(result);
