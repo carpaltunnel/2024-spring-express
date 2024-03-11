@@ -30,7 +30,6 @@ export const getWidget = async (req, res, next) => {
 export const deleteWidget = async (req, res, next) => {
   console.log(`Controller : deleteWidget(${req.params.id})`);
 
-  // TODO : success vs failure + status code
   const result = WidgetsCoordinator.deleteWidget(req.params.id);
 
   if (result) {
