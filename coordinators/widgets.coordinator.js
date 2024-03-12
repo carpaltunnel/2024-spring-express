@@ -10,8 +10,6 @@ export default class WidgetsCoordinator {
   static createWidget = (newWidget) => {
     console.log('\t Coordinator : createWidget()');
 
-    throw new Error('Cameron breaking stuff');
-
     const widget = {
       ...newWidget,
       id: uuid(),
