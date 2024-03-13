@@ -1,5 +1,12 @@
 import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
 
+/**
+ * getWidgets - Return a list of widgets.
+ * @async
+ * @param {Object} req - Express Request Object
+ * @param {Object} res - Express Response Object
+ * @param {Function} next - Express "next" middleware function
+ */
 export const getWidgets = async (req, res, next) => {
   console.log('Controller : getWidgets()');
 

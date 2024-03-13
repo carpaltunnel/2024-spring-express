@@ -7,11 +7,20 @@ let widgets = [
 ];
 
 export default class WidgetsModel {
+  /**
+   * getWidgets - return a list of widgets from the database
+   * @returns {Array} - An array of widget objects.
+   */
   static getWidgets = () => {
     console.log('\t\t Model : getWidgets()');
     return widgets;
   };
 
+  /**
+   * createWidget - Insert a new widget object into database
+   * @param {Object} newWidget - The new widget to create in the database
+   * @returns {Object} - The created widget.
+   */
   static createWidget = (newWidget) => {
     console.log('\t\t Model : getWidgets()');
     widgets.push(newWidget);

@@ -21,5 +21,5 @@ app.use('/api/v1/widgets', widgetsRouter);
 app.use(errorMiddleware());
 
 app.listen(port, () => {
-  console.log(`Starting express application on port ${port}`);
+  console.log(`Starting express application on port ${port} @ ${new Date().toISOString()}`);
 });

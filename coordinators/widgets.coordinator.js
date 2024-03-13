@@ -1,12 +1,23 @@
 import { v4 as uuid } from 'uuid';
 import WidgetsModel from '../models/widgets.model.js';
 
+
 export default class WidgetsCoordinator {
+  /**
+   *  testing
+   *  @deprecated
+   */
   static getWidgets = () => {
     console.log('\t Coordinator : getWidgets()');
     return WidgetsModel.getWidgets();
   };
 
+  /**
+   * test
+   * @param {*} newWidget 
+   * @returns newWidget
+   * @todo make this better.
+   */
   static createWidget = (newWidget) => {
     console.log('\t Coordinator : createWidget()');
 
