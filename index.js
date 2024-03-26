@@ -25,6 +25,8 @@ app.use(errorMiddleware());
 const config = {
   url: 'mongodb://127.0.0.1:27017',
   database: 'arca',
+  minPoolSize: 3,
+  maxPoolSize: 10,
 };
 
 db.init(config);
