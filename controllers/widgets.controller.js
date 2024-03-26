@@ -10,16 +10,19 @@ import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
 export const getWidgets = async (req, res, next) => {
   console.log('Controller : getWidgets()');
 
-  const result = await WidgetsCoordinator.getWidgets();
-
-  res.status(200).json(result);
+  try {
+    const result = await WidgetsCoordinator.getWidgets();
+    res.status(200).json(result);
+  } catch (ex) {
+    next(ex);
+  }
 };
 
 export const createWidget = async (req, res, next) => {
   console.log('Controller : createWidget()');
 
   try {
-    const result = WidgetsCoordinator.createWidget(req.body);
+    const result = await WidgetsCoordinator.createWidget(req.body);
     res.status(201).json(result);
   } catch (ex) {
     next(ex);
@@ -29,42 +32,49 @@ export const createWidget = async (req, res, next) => {
 export const getWidget = async (req, res, next) => {
   console.log(`Controller : getWidget(${req.params.id})`);
 
-  const result = WidgetsCoordinator.getWidget(req.params.id);
-  if (result) {
-    res.status(200).json(result);
-  } else {
-    res.status(404).json();
+  try {
+    const result = await WidgetsCoordinator.getWidget(req.params.id);
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json();
+    }
+  } catch (ex) {
+    next(ex);
   }
 };
 
 export const deleteWidget = async (req, res, next) => {
   console.log(`Controller : deleteWidget(${req.params.id})`);
 
-  const result = WidgetsCoordinator.deleteWidget(req.params.id);
-
-  if (result) {
+  try {
+    await WidgetsCoordinator.deleteWidget(req.params.id);
     res.status(204).json();
-  } else {
-    res.status(404).json();
+  } catch (ex) {
+    next(ex);
   }
 };
 
 export const replaceWidget = async (req, res, next) => {
   console.log(`Controller : replaceWidget(${req.params.id})`);
 
-  const result = WidgetsCoordinator.replaceWidget(req.params.id, req.body);
+  try {
+    const result = await WidgetsCoordinator.replaceWidget(req.params.id, req.body);
 
-  if (result) {
-    res.status(200).json(result);
-  } else {
-    res.status(404).json();
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json();
+    }
+  } catch (ex) {
+    next(ex);
   }
 };
 
 export const updateWidget = async (req, res, next) => {
   console.log(`Controller : updateWidget(${req.params.id})`);
 
-  const result = WidgetsCoordinator.updateWidget(req.params.id, req.body);
+  const result = await WidgetsCoordinator.updateWidget(req.params.id, req.body);
 
   if (result) {
     res.status(200).json(result);

@@ -17,7 +17,10 @@ export default class WidgetsModel {
   static getWidgets = async () => {
     console.log('\t\t Model : getWidgets()');
 
-    return db.getDb().collection(Constants.WIDGETS_COLLECTION).find({}).toArray();
+    return db.dbWidgets().find(
+      {},
+      { projection: Constants.DEFAULT_PROJECTION },
+    ).toArray();
   };
 
   /**
@@ -25,56 +28,55 @@ export default class WidgetsModel {
    * @param {Object} newWidget - The new widget to create in the database
    * @returns {Object} - The created widget.
    */
-  static createWidget = (newWidget) => {
-    console.log('\t\t Model : getWidgets()');
-    widgets.push(newWidget);
-    return newWidget;
+  static createWidget = async (newWidget) => {
+    console.log('\t\t Model : createWidgets()');
+    await db.dbWidgets().insertOne(newWidget);
+
+    const returnWidget = { ...newWidget };
+    // eslint-disable-next-line no-underscore-dangle
+    delete returnWidget._id;
+    return returnWidget;
   };
 
   static getWidget = (id) => {
     console.log('\t\t Model : getWidget()');
-
-    const widget = widgets.find((w) => (w.id === id));
-    return widget;
+    return db.dbWidgets().findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
   static deleteWidget = (id) => {
     console.log('\t\t Model : deleteWidget()');
 
-    const widgetCountBeforeDelete = widgets.length;
-    widgets = widgets.filter((w) => (w.id !== id));
-
-    if (widgetCountBeforeDelete === widgets.length) {
-      return false;
-    }
-
-    return true;
+    return db.dbWidgets().deleteOne({ id });
   };
 
-  static replaceWidget = (id, widget) => {
-    const widgetIndex = widgets.findIndex((w) => (w.id === id));
+  static replaceWidget = async (id, widget) => {
+    const result = await db.dbWidgets().replaceOne({ id }, widget);
 
-    if (widgetIndex > -1) {
-      widgets.splice(widgetIndex, 1, widget);
+    if (result.matchedCount === 1) {
       return widget;
     }
 
     return false;
   };
 
-  static updateWidget = (id, widget) => {
-    const widgetIndex = widgets.findIndex((w) => (w.id === id));
+  static updateWidget = async (id, widget) => {
+    const update = {
+      $set: {},
+    };
 
-    if (widgetIndex > -1) {
-      Object.keys(widget).forEach((key) => {
-        if (key === 'id') {
-          return;
-        }
+    Object.keys(widget).forEach((key) => {
+      if (key === 'id') {
+        return;
+      }
 
-        widgets[widgetIndex][key] = widget[key];
-      });
+      update.$set[key] = widget[key];
+    });
 
-      return widgets[widgetIndex];
+    const result = await db.dbWidgets().findOneAndUpdate({ id }, update, { returnDocument: 'after' });
+
+    if (result) {
+      delete result._id;
+      return result;
     }
 
     return false;
