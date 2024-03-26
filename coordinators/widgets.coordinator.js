@@ -5,7 +5,6 @@ import WidgetsModel from '../models/widgets.model.js';
 export default class WidgetsCoordinator {
   /**
    *  testing
-   *  @deprecated
    */
   static getWidgets = () => {
     console.log('\t Coordinator : getWidgets()');

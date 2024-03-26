@@ -1,3 +1,6 @@
+import { db } from '../lib/database.js';
+import Constants from '../lib/constants.js';
+
 let widgets = [
   {
     id: '1',
@@ -11,9 +14,10 @@ export default class WidgetsModel {
    * getWidgets - return a list of widgets from the database
    * @returns {Array} - An array of widget objects.
    */
-  static getWidgets = () => {
+  static getWidgets = async () => {
     console.log('\t\t Model : getWidgets()');
-    return widgets;
+
+    return db.getDb().collection(Constants.WIDGETS_COLLECTION).find({}).toArray();
   };
 
   /**

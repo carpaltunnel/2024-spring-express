@@ -10,7 +10,7 @@ import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
 export const getWidgets = async (req, res, next) => {
   console.log('Controller : getWidgets()');
 
-  const result = WidgetsCoordinator.getWidgets();
+  const result = await WidgetsCoordinator.getWidgets();
 
   res.status(200).json(result);
 };
