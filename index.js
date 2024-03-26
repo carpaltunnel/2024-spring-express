@@ -1,3 +1,4 @@
+import config from 'config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import colorCheckerMiddleware from './middleware/widgetColorChecker.js';
@@ -22,14 +23,17 @@ app.use('/api/v1/widgets', widgetsRouter);
 app.use(errorMiddleware());
 
 // TODO: Environment based configs
-const config = {
+const mongoConfig = config.get('mongo');
+/*{
   url: 'mongodb://127.0.0.1:27017',
   database: 'arca',
   minPoolSize: 3,
   maxPoolSize: 10,
-};
+};*/
 
-db.init(config);
+console.log(mongoConfig);
+
+db.init(mongoConfig);
 
 app.listen(port, () => {
   console.log(`Starting express application on port ${port} @ ${new Date().toISOString()}`);

@@ -1,0 +1,8 @@
+{
+  "mongo": {
+    "url": "mongodb://127.0.0.1:27017",
+    "database": "arca",
+    "minPoolSize": 1,
+    "maxPoolSize": 2
+  }
+}

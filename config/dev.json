@@ -1,0 +1,8 @@
+{
+  "mongo": {
+    "url": "mongodb://dev-mongo-instance:27017",
+    "database": "arca",
+    "minPoolSize": 1,
+    "maxPoolSize": 5
+  }
+}
