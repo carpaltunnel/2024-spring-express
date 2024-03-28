@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://myapplication/widget.json",
+  "title": "Widget",
+  "description": "A widget",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "description": "The unique id for this widget in UUID format",
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "description": "The name of this widget",
+      "type": "string",
+      "minLength": 3
+    },
+    "color": {
+      "description": "The color of this widget",
+      "type": "string",
+      "enum": ["red", "green", "blue"]
+    },
+    "weight": {
+      "description": "The weight of this widget",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 25
+    },
+    "tags": {
+      "description": "Tags for this widget for searching and categorization",
+      "type": "array"
+    },
+    "tracking": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "description": "The date this widget was last updated",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedBy": {
+          "description": "The userID that last updated this widget",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

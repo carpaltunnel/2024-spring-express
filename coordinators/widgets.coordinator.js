@@ -1,5 +1,12 @@
 import { v4 as uuid } from 'uuid';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 import WidgetsModel from '../models/widgets.model.js';
+import widgetSchema from '../schemas/widget.json' assert { type: 'json' };
+
+const ajv = new Ajv();
+addFormats(ajv);
+const validate = ajv.compile(widgetSchema);
 
 
 export default class WidgetsCoordinator {
@@ -25,6 +32,11 @@ export default class WidgetsCoordinator {
       id: uuid(),
     };
 
+    const valid = validate(widget);
+    if (!valid) {
+      throw validate.errors;
+    }
+
     return WidgetsModel.createWidget(widget);
   };
 
@@ -44,11 +56,23 @@ export default class WidgetsCoordinator {
       ...widget,
       id,
     };
+
+    const valid = validate(widget);
+    if (!valid) {
+      throw validate.errors;
+    }
+
     return WidgetsModel.replaceWidget(id, replaceWidget);
   };
 
   static updateWidget = (id, widget) => {
     console.log('\t Coordinator : updateWidget()');
+
+    const valid = validate(widget);
+    if (!valid) {
+      throw validate.errors;
+    }
+
     return WidgetsModel.updateWidget(id, widget);
   };
 }

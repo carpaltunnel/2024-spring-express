@@ -74,11 +74,15 @@ export const replaceWidget = async (req, res, next) => {
 export const updateWidget = async (req, res, next) => {
   console.log(`Controller : updateWidget(${req.params.id})`);
 
-  const result = await WidgetsCoordinator.updateWidget(req.params.id, req.body);
+  try {
+    const result = await WidgetsCoordinator.updateWidget(req.params.id, req.body);
 
-  if (result) {
-    res.status(200).json(result);
-  } else {
-    res.status(404).json();
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json();
+    }
+  } catch (ex) {
+    next(ex);
   }
 };
