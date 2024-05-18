@@ -13,6 +13,8 @@ const app = express();
 const port = 3000;
 app.use(json());
 
+app.use(express.static('static'));
+
 app.post('/api/v1/widgets', colorCheckerMiddleware());
 app.patch('/api/v1/widgets/:id', colorCheckerMiddleware());
 app.put('/api/v1/widgets/:id', colorCheckerMiddleware());
@@ -24,12 +26,7 @@ app.use(errorMiddleware());
 
 // TODO: Environment based configs
 const mongoConfig = config.get('mongo');
-/*{
-  url: 'mongodb://127.0.0.1:27017',
-  database: 'arca',
-  minPoolSize: 3,
-  maxPoolSize: 10,
-};*/
+
 
 console.log(mongoConfig);
 
