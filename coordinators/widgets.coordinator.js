@@ -75,4 +75,8 @@ export default class WidgetsCoordinator {
 
     return WidgetsModel.updateWidget(id, widget);
   };
+
+  static addImageToWidget = (id, imagePath) => {
+    return WidgetsModel.addImageToWidget(id, imagePath);
+  };
 }
