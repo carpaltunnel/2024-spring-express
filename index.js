@@ -6,6 +6,9 @@ import errorMiddleware from './middleware/errorHandler.js';
 import widgetsRouter from './routes/widgets.routes.js';
 import { db } from './lib/database.js';
 
+
+import multer from 'multer';
+
 const { json } = bodyParser;
 
 // This is my express application
@@ -26,10 +29,6 @@ app.use(errorMiddleware());
 
 // TODO: Environment based configs
 const mongoConfig = config.get('mongo');
-
-
-console.log(mongoConfig);
-
 db.init(mongoConfig);
 
 app.listen(port, () => {

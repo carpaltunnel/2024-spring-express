@@ -81,4 +81,14 @@ export default class WidgetsModel {
 
     return false;
   };
+
+  static addImageToWidget = async (id, imagePath) => {
+    const update = {
+      $set: {
+        imagePath,
+      },
+    };
+
+    return db.dbWidgets().updateOne({ id }, update);
+  };
 }

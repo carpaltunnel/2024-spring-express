@@ -1,3 +1,4 @@
+import { rename } from 'fs/promises';
 import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
 
 /**
@@ -79,6 +80,33 @@ export const updateWidget = async (req, res, next) => {
 
     if (result) {
       res.status(200).json(result);
+    } else {
+      res.status(404).json();
+    }
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+export const uploadImage = async (req, res, next) => {
+  console.log(`Controller : uploadImage(${req.params.id})`);
+
+  if (!req.file) {
+    res.sendStatus(400);
+  }
+
+  if (req.file.mimetype.indexOf('image') < 0) {
+    res.sendStatus(400);
+  }
+
+  try {
+    const newFilename = `${req.file.destination}${req.file.originalname}`;
+    await rename(req.file.path, newFilename);
+
+    const result = await WidgetsCoordinator.addImageToWidget(req.params.id, newFilename);
+
+    if (result) {
+      res.status(204).json();
     } else {
       res.status(404).json();
     }
