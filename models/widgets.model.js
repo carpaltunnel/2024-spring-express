@@ -14,12 +14,15 @@ export default class WidgetsModel {
    * getWidgets - return a list of widgets from the database
    * @returns {Array} - An array of widget objects.
    */
-  static getWidgets = async () => {
+  static getWidgets = async (sortDirection) => {
     console.log('\t\t Model : getWidgets()');
 
     return db.dbWidgets().find(
       {},
-      { projection: Constants.DEFAULT_PROJECTION },
+      {
+        sort: { name: sortDirection },
+        projection: Constants.DEFAULT_PROJECTION,
+      },
     ).toArray();
   };
 

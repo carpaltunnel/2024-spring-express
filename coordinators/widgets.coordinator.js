@@ -13,9 +13,9 @@ export default class WidgetsCoordinator {
   /**
    *  testing
    */
-  static getWidgets = () => {
+  static getWidgets = (sortDirection) => {
     console.log('\t Coordinator : getWidgets()');
-    return WidgetsModel.getWidgets();
+    return WidgetsModel.getWidgets(sortDirection);
   };
 
   /**

@@ -10,9 +10,10 @@ import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
  */
 export const getWidgets = async (req, res, next) => {
   console.log('Controller : getWidgets()');
+  const sortDirection = req.query?.sortDirection?.toLowerCase() === 'desc' ? -1 : 1;
 
   try {
-    const result = await WidgetsCoordinator.getWidgets();
+    const result = await WidgetsCoordinator.getWidgets(sortDirection);
     res.status(200).json(result);
   } catch (ex) {
     next(ex);
