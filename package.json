@@ -19,7 +19,8 @@
     "mongodb": "^6.5.0",
     "multer": "^1.4.5-lts.1",
     "uuid": "^9.0.1",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
