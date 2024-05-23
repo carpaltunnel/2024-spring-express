@@ -4,5 +4,8 @@
     "database": "arca",
     "minPoolSize": 1,
     "maxPoolSize": 2
+  },
+  "logging": {
+    "level": "warn"
   }
 }

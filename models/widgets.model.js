@@ -8,7 +8,7 @@ export default class WidgetsModel {
    * @returns {Array} - An array of widget objects.
    */
   static getWidgets = async (sortDirection) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'getWidgets',
     });
@@ -28,7 +28,7 @@ export default class WidgetsModel {
    * @returns {Object} - The created widget.
    */
   static createWidget = async (newWidget) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'createWidget',
     });
@@ -41,7 +41,7 @@ export default class WidgetsModel {
   };
 
   static getWidget = (id) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'getWidget',
       id,
@@ -50,7 +50,7 @@ export default class WidgetsModel {
   };
 
   static deleteWidget = (id) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'deleteWidget',
       id,
@@ -60,7 +60,7 @@ export default class WidgetsModel {
   };
 
   static replaceWidget = async (id, widget) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'replaceWidget',
       id,
@@ -75,7 +75,7 @@ export default class WidgetsModel {
   };
 
   static updateWidget = async (id, widget) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'updateWidget',
       id,
@@ -103,7 +103,7 @@ export default class WidgetsModel {
   };
 
   static addImageToWidget = async (id, imagePath) => {
-    logger.info({
+    logger.debug({
       location: 'model',
       function: 'addImageToWidget',
       id,

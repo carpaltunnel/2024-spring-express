@@ -15,7 +15,7 @@ export default class WidgetsCoordinator {
    *  testing
    */
   static getWidgets = (sortDirection) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'getWidgets',
     });
@@ -29,7 +29,7 @@ export default class WidgetsCoordinator {
    * @todo make this better.
    */
   static createWidget = (newWidget) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'createWidget',
     });
@@ -48,7 +48,7 @@ export default class WidgetsCoordinator {
   };
 
   static getWidget = (id) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'getWidget',
       id,
@@ -66,7 +66,7 @@ export default class WidgetsCoordinator {
   };
 
   static replaceWidget = (id, widget) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'replaceWidget',
       id,
@@ -85,7 +85,7 @@ export default class WidgetsCoordinator {
   };
 
   static updateWidget = (id, widget) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'updateWidget',
       id,
@@ -100,7 +100,7 @@ export default class WidgetsCoordinator {
   };
 
   static addImageToWidget = (id, imagePath) => {
-    logger.info({
+    logger.debug({
       location: 'coordinator',
       function: 'addImageToWidget',
       imagePath,
