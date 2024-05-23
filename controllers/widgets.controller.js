@@ -1,5 +1,6 @@
 import { rename } from 'fs/promises';
 import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
+import logger from '../lib/logger.js';
 
 /**
  * getWidgets - Return a list of widgets.
@@ -9,7 +10,11 @@ import WidgetsCoordinator from '../coordinators/widgets.coordinator.js';
  * @param {Function} next - Express "next" middleware function
  */
 export const getWidgets = async (req, res, next) => {
-  console.log('Controller : getWidgets()');
+  logger.info({
+    location: 'controller',
+    function: 'getWidgets',
+    method: 'GET',
+  });
   const sortDirection = req.query?.sortDirection?.toLowerCase() === 'desc' ? -1 : 1;
 
   try {
@@ -21,7 +26,11 @@ export const getWidgets = async (req, res, next) => {
 };
 
 export const createWidget = async (req, res, next) => {
-  console.log('Controller : createWidget()');
+  logger.info({
+    location: 'controller',
+    function: 'createWidget',
+    method: 'POST',
+  });
 
   try {
     const result = await WidgetsCoordinator.createWidget(req.body);
@@ -32,7 +41,12 @@ export const createWidget = async (req, res, next) => {
 };
 
 export const getWidget = async (req, res, next) => {
-  console.log(`Controller : getWidget(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'getWidget',
+    method: 'GET',
+    id: req.params.id,
+  });
 
   try {
     const result = await WidgetsCoordinator.getWidget(req.params.id);
@@ -47,7 +61,12 @@ export const getWidget = async (req, res, next) => {
 };
 
 export const deleteWidget = async (req, res, next) => {
-  console.log(`Controller : deleteWidget(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'deleteWidget',
+    method: 'DELETE',
+    id: req.params.id,
+  });
 
   try {
     await WidgetsCoordinator.deleteWidget(req.params.id);
@@ -58,7 +77,12 @@ export const deleteWidget = async (req, res, next) => {
 };
 
 export const replaceWidget = async (req, res, next) => {
-  console.log(`Controller : replaceWidget(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'replaceWidget',
+    method: 'PUT',
+    id: req.params.id,
+  });
 
   try {
     const result = await WidgetsCoordinator.replaceWidget(req.params.id, req.body);
@@ -74,7 +98,12 @@ export const replaceWidget = async (req, res, next) => {
 };
 
 export const updateWidget = async (req, res, next) => {
-  console.log(`Controller : updateWidget(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'updateWidget',
+    method: 'PATCH',
+    id: req.params.id,
+  });
 
   try {
     const result = await WidgetsCoordinator.updateWidget(req.params.id, req.body);
@@ -90,7 +119,12 @@ export const updateWidget = async (req, res, next) => {
 };
 
 export const uploadImage = async (req, res, next) => {
-  console.log(`Controller : uploadImage(${req.params.id})`);
+  logger.info({
+    location: 'controller',
+    function: 'uploadImage',
+    method: 'POST',
+    id: req.params.id,
+  });
 
   if (!req.file) {
     res.sendStatus(400);
