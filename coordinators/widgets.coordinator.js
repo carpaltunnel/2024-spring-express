@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import logger from '../lib/logger.js';
 import WidgetsModel from '../models/widgets.model.js';
 import widgetSchema from '../schemas/widget.json' assert { type: 'json' };
 
@@ -14,7 +15,10 @@ export default class WidgetsCoordinator {
    *  testing
    */
   static getWidgets = (sortDirection) => {
-    console.log('\t Coordinator : getWidgets()');
+    logger.info({
+      location: 'coordinator',
+      function: 'getWidgets',
+    });
     return WidgetsModel.getWidgets(sortDirection);
   };
 
@@ -25,7 +29,10 @@ export default class WidgetsCoordinator {
    * @todo make this better.
    */
   static createWidget = (newWidget) => {
-    console.log('\t Coordinator : createWidget()');
+    logger.info({
+      location: 'coordinator',
+      function: 'createWidget',
+    });
 
     const widget = {
       ...newWidget,
@@ -41,17 +48,29 @@ export default class WidgetsCoordinator {
   };
 
   static getWidget = (id) => {
-    console.log('\t Coordinator : getWidget()');
+    logger.info({
+      location: 'coordinator',
+      function: 'getWidget',
+      id,
+    });
     return WidgetsModel.getWidget(id);
   };
 
   static deleteWidget = (id) => {
-    console.log('\t Coordinator : deleteWidget()');
+    logger.info({
+      location: 'coordinator',
+      function: 'deleteWidget',
+      id,
+    });
     return WidgetsModel.deleteWidget(id);
   };
 
   static replaceWidget = (id, widget) => {
-    console.log('\t Coordinator : replaceWidget()');
+    logger.info({
+      location: 'coordinator',
+      function: 'replaceWidget',
+      id,
+    });
     const replaceWidget = {
       ...widget,
       id,
@@ -66,7 +85,11 @@ export default class WidgetsCoordinator {
   };
 
   static updateWidget = (id, widget) => {
-    console.log('\t Coordinator : updateWidget()');
+    logger.info({
+      location: 'coordinator',
+      function: 'updateWidget',
+      id,
+    });
 
     const valid = validate(widget);
     if (!valid) {
@@ -77,6 +100,12 @@ export default class WidgetsCoordinator {
   };
 
   static addImageToWidget = (id, imagePath) => {
+    logger.info({
+      location: 'coordinator',
+      function: 'addImageToWidget',
+      imagePath,
+      id,
+    });
     return WidgetsModel.addImageToWidget(id, imagePath);
   };
 }

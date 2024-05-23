@@ -1,13 +1,6 @@
 import { db } from '../lib/database.js';
 import Constants from '../lib/constants.js';
-
-let widgets = [
-  {
-    id: '1',
-    name: 'Widget #1',
-    color: 'blue',
-  },
-];
+import logger from '../lib/logger.js';
 
 export default class WidgetsModel {
   /**
@@ -15,7 +8,10 @@ export default class WidgetsModel {
    * @returns {Array} - An array of widget objects.
    */
   static getWidgets = async (sortDirection) => {
-    console.log('\t\t Model : getWidgets()');
+    logger.info({
+      location: 'model',
+      function: 'getWidgets',
+    });
 
     return db.dbWidgets().find(
       {},
@@ -32,7 +28,10 @@ export default class WidgetsModel {
    * @returns {Object} - The created widget.
    */
   static createWidget = async (newWidget) => {
-    console.log('\t\t Model : createWidgets()');
+    logger.info({
+      location: 'model',
+      function: 'createWidget',
+    });
     await db.dbWidgets().insertOne(newWidget);
 
     const returnWidget = { ...newWidget };
@@ -42,17 +41,30 @@ export default class WidgetsModel {
   };
 
   static getWidget = (id) => {
-    console.log('\t\t Model : getWidget()');
+    logger.info({
+      location: 'model',
+      function: 'getWidget',
+      id,
+    });
     return db.dbWidgets().findOne({ id }, { projection: Constants.DEFAULT_PROJECTION });
   };
 
   static deleteWidget = (id) => {
-    console.log('\t\t Model : deleteWidget()');
+    logger.info({
+      location: 'model',
+      function: 'deleteWidget',
+      id,
+    });
 
     return db.dbWidgets().deleteOne({ id });
   };
 
   static replaceWidget = async (id, widget) => {
+    logger.info({
+      location: 'model',
+      function: 'replaceWidget',
+      id,
+    });
     const result = await db.dbWidgets().replaceOne({ id }, widget);
 
     if (result.matchedCount === 1) {
@@ -63,6 +75,11 @@ export default class WidgetsModel {
   };
 
   static updateWidget = async (id, widget) => {
+    logger.info({
+      location: 'model',
+      function: 'updateWidget',
+      id,
+    });
     const update = {
       $set: {},
     };
@@ -86,6 +103,12 @@ export default class WidgetsModel {
   };
 
   static addImageToWidget = async (id, imagePath) => {
+    logger.info({
+      location: 'model',
+      function: 'addImageToWidget',
+      id,
+      imagePath,
+    });
     const update = {
       $set: {
         imagePath,
