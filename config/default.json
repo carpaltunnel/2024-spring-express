@@ -6,6 +6,6 @@
     "maxPoolSize": 2
   },
   "logging": {
-    "level": "warn"
+    "level": "debug"
   }
 }

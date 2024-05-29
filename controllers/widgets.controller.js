@@ -10,7 +10,7 @@ import logger from '../lib/logger.js';
  * @param {Function} next - Express "next" middleware function
  */
 export const getWidgets = async (req, res, next) => {
-  logger.info({
+  logger.info('Calling controller.getWidgets', {
     location: 'controller',
     function: 'getWidgets',
     method: 'GET',
