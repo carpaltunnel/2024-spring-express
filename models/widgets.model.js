@@ -8,7 +8,7 @@ export default class WidgetsModel {
    * @returns {Array} - An array of widget objects.
    */
   static getWidgets = async (sortDirection) => {
-    logger.debug({
+    logger.debug('getWidgets', {
       location: 'model',
       function: 'getWidgets',
     });

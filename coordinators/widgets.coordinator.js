@@ -15,7 +15,7 @@ export default class WidgetsCoordinator {
    *  testing
    */
   static getWidgets = (sortDirection) => {
-    logger.debug({
+    logger.debug('getWidgets', {
       location: 'coordinator',
       function: 'getWidgets',
     });
