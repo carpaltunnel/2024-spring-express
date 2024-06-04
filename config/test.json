@@ -1,0 +1,11 @@
+{
+  "mongo": {
+    "url": "mongodb://127.0.0.1:27018",
+    "database": "arcaTest",
+    "minPoolSize": 1,
+    "maxPoolSize": 2
+  },
+  "logging": {
+    "level": "debug"
+  }
+}

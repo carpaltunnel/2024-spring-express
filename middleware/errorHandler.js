@@ -1,5 +1,5 @@
 const middleware = () => (err, req, res, next) => {
-  console.error(`ERROR : The following error occurred : ${err}`);
+  console.error(`ERROR : The following error occurred : ${JSON.stringify(err)}`);
 
   let error;
   let responseCode = 500;

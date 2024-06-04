@@ -71,11 +71,11 @@ export default class WidgetsCoordinator {
       function: 'replaceWidget',
       id,
     });
+
     const replaceWidget = {
       ...widget,
       id,
     };
-
     const valid = validate(widget);
     if (!valid) {
       throw validate.errors;
@@ -91,12 +91,17 @@ export default class WidgetsCoordinator {
       id,
     });
 
-    const valid = validate(widget);
+    const updateWidget = {
+      ...widget,
+      id,
+    };
+
+    const valid = validate(updateWidget);
     if (!valid) {
       throw validate.errors;
     }
 
-    return WidgetsModel.updateWidget(id, widget);
+    return WidgetsModel.updateWidget(id, updateWidget);
   };
 
   static addImageToWidget = (id, imagePath) => {
