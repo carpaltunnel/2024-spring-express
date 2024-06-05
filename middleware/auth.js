@@ -1,8 +1,7 @@
-const validApiKey = 'my-api-key';
-const validApiSecret = 'my-secret';
-// TODO: Expiration dates (ttl)
+import ApiKeysCoordinator from '../coordinators/api-key.coordinator.js';
+import logger from '../lib/logger.js';
 
-const middleware = () => (req, res, next) => {
+const middleware = () => async (req, res, next) => {
   if (!req.headers.authorization) {
     res.status(401).send();
     return;
@@ -13,11 +12,16 @@ const middleware = () => (req, res, next) => {
   const apiKey = values[0];
   const apiSecret = values[1];
 
-  if (apiKey !== validApiKey || apiSecret !== validApiSecret) {
+  const dbKey = await ApiKeysCoordinator.getApiKey(apiKey, apiSecret);
+
+  if (!dbKey) {
+    logger.warn('API Key and/or secret not found!', {
+      apiKey,
+    });
     res.status(401).send();
     return;
   }
-
+  
   next();
 };
 
