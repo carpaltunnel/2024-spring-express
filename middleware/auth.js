@@ -1,6 +1,8 @@
 import AuthCoordinator from '../coordinators/auth.coordinator.js';
 import logger from '../lib/logger.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import Constants from '../lib/constants.js';
 
 const middleware = () => async (req, res, next) => {
   if (!req.headers.authorization) {
@@ -9,6 +11,7 @@ const middleware = () => async (req, res, next) => {
   }
 
   /*
+  // API Key/Secret Validation (basic)
   const authValue = Buffer.from(req.headers.authorization, 'base64').toString('utf8');
   const values = authValue.split(':');
   const apiKey = values[0];
@@ -25,12 +28,27 @@ const middleware = () => async (req, res, next) => {
   }
   */
 
+  /*
+  // Username/Password authentication (basic)
   const authValue = Buffer.from(req.headers.authorization, 'base64').toString('utf8');
   const values = authValue.split(':');
   const username = values[0];
   const password = values[1];
 
   const valid = await AuthCoordinator.validateUserPass(username, password);
+  */
+
+  // TODO: Don't require auth on POST /api/v1/auth
+  // TODO: Support both UN/PW and API key/secret auth
+  
+  const token = req.headers.authorization;
+  let valid = false;
+  
+  try {
+    valid = jwt.verify(token, Constants.JWT_SECRET);
+  } catch (ex) {
+    valid = false;
+  }
 
   if (!valid) {
     res.status(401).send();

@@ -5,6 +5,7 @@ import colorCheckerMiddleware from './middleware/widgetColorChecker.js';
 import errorMiddleware from './middleware/errorHandler.js';
 import authMiddleware from './middleware/auth.js';
 import widgetsRouter from './routes/widgets.routes.js';
+import { generateJwt } from './controllers/auth.controller.js';
 import { db } from './lib/database.js';
 
 import multer from 'multer';
@@ -25,6 +26,9 @@ app.patch('/api/v1/widgets/:id', colorCheckerMiddleware());
 app.put('/api/v1/widgets/:id', colorCheckerMiddleware());
 
 app.use('/api/v1/widgets', widgetsRouter);
+
+// Generate JWT Route
+app.post('/api/v1/auth', generateJwt);
 
 // Error middleware MUST be last
 app.use(errorMiddleware());
