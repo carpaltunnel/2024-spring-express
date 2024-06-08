@@ -13,6 +13,7 @@ import {
 const widgetsRouter = express.Router();
 
 // GET /api/v1/widgets
+//widgetsRouter.get('/', [authMiddleware()], getWidgets);
 widgetsRouter.get('/', getWidgets);
 
 // POST /api/v1/widgets
