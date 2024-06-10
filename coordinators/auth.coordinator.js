@@ -1,8 +1,7 @@
-import AuthModel from '../models/auth.js';
 import bcrypt from 'bcryptjs';
-import Constants from '../lib/constants.js';
 import jwt from 'jsonwebtoken';
-
+import AuthModel from '../models/auth.js';
+import Constants from '../lib/constants.js';
 
 export default class AuthCoordinator {
   static getApiKey = (key, secret) => {
