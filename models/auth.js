@@ -24,7 +24,6 @@ export default class AuthModel {
 
     return db.getDb().collection(Constants.USERS_COLLECTION).findOne(
       { username },
-      { projection: { password: 1, _id: 0 } },
     );
   };
 }
