@@ -16,8 +16,6 @@ const { json } = bodyParser;
 const app = express();
 const port = 3000;
 
-app.use(authMiddleware());
-
 app.use(json());
 app.use(express.static('static'));
 
@@ -25,7 +23,7 @@ app.post('/api/v1/widgets', colorCheckerMiddleware());
 app.patch('/api/v1/widgets/:id', colorCheckerMiddleware());
 app.put('/api/v1/widgets/:id', colorCheckerMiddleware());
 
-app.use('/api/v1/widgets', widgetsRouter);
+app.use('/api/v1/widgets', [authMiddleware()], widgetsRouter);
 
 // Generate JWT Route
 app.post('/api/v1/auth', generateJwt);
