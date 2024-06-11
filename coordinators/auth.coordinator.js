@@ -10,8 +10,13 @@ export default class AuthCoordinator {
 
   static validateUserPass = async (username, password) => {
     const mongoResult = await AuthModel.fetchPasswordHash(username);
+
+    if (!mongoResult) {
+      return null;
+    }
+
     const passwordHash = mongoResult.password;
-    if (bcrypt.compare(password, passwordHash)) {
+    if (bcrypt.compareSync(password, passwordHash)) {
       return mongoResult;
     }
 
@@ -21,7 +26,7 @@ export default class AuthCoordinator {
   static generateJwt = async (requestBody) => {
     const user = await AuthCoordinator
       .validateUserPass(requestBody.username, requestBody.password);
-
+console.error(user);
     if (user) {
       const token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),
