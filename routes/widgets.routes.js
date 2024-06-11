@@ -9,6 +9,7 @@ import {
   updateWidget,
   uploadImage,
 } from '../controllers/widgets.controller.js';
+import readWriteAuth from '../middleware/readWriteAuth.js';
 
 const widgetsRouter = express.Router();
 
@@ -16,19 +17,19 @@ const widgetsRouter = express.Router();
 widgetsRouter.get('/', getWidgets);
 
 // POST /api/v1/widgets
-widgetsRouter.post('/', createWidget);
+widgetsRouter.post('/', [readWriteAuth()], createWidget);
 
 // GET /api/v1/widgets/<id>
 widgetsRouter.get('/:id', getWidget);
 
 // PUT /api/v1/widgets/<id>
-widgetsRouter.put('/:id', replaceWidget);
+widgetsRouter.put('/:id', [readWriteAuth()], replaceWidget);
 
 // DELETE /api/v1/widgets/<id>
-widgetsRouter.delete('/:id', deleteWidget);
+widgetsRouter.delete('/:id', [readWriteAuth()], deleteWidget);
 
 // PATCH /api/v1/widgets/<id>
-widgetsRouter.patch('/:id', updateWidget);
+widgetsRouter.patch('/:id', [readWriteAuth()], updateWidget);
 
 const uploader = multer({
   dest: './static/widgets/image-uploads/',

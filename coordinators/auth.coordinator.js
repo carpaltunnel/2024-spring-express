@@ -21,7 +21,7 @@ export default class AuthCoordinator {
   static generateJwt = async (requestBody) => {
     const user = await AuthCoordinator
       .validateUserPass(requestBody.username, requestBody.password);
-console.log(user);
+
     if (user) {
       const token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),

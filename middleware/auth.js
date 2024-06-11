@@ -1,6 +1,3 @@
-import AuthCoordinator from '../coordinators/auth.coordinator.js';
-import logger from '../lib/logger.js';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Constants from '../lib/constants.js';
 
@@ -38,7 +35,6 @@ const middleware = () => async (req, res, next) => {
   const valid = await AuthCoordinator.validateUserPass(username, password);
   */
 
-  // TODO: Don't require auth on POST /api/v1/auth
   // TODO: Support both UN/PW and API key/secret auth
   
   const token = req.headers.authorization;
