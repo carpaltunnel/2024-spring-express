@@ -7,6 +7,7 @@ import authMiddleware from './middleware/auth.js';
 import widgetsRouter from './routes/widgets.routes.js';
 import { generateJwt } from './controllers/auth.controller.js';
 import { db } from './lib/database.js';
+import { healthcheck } from './controllers/healthcheck.js';
 
 import multer from 'multer';
 
@@ -18,6 +19,8 @@ const port = 3000;
 
 app.use(json());
 app.use(express.static('static'));
+
+app.get('/api/v1/healthcheck', healthcheck);
 
 app.post('/api/v1/widgets', colorCheckerMiddleware());
 app.patch('/api/v1/widgets/:id', colorCheckerMiddleware());
