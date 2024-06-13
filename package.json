@@ -5,10 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node index.js",
     "lint": "npx eslint --ext .js .",
     "test": "NODE_ENV=test npx mocha test/**"
   },
   "keywords": [],
+  "engines": {
+    "node": "20.x"
+  },  
   "author": "",
   "license": "ISC",
   "dependencies": {
